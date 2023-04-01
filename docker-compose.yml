@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  node:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    command: sh -c 'cd react-app && yarn start'
+    ports:
+      - '8001:3000'
