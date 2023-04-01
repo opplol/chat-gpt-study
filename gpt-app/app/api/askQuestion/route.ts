@@ -2,7 +2,6 @@ import query from '@/lib/queryApi'
 import admin from 'firebase-admin'
 import { adminDb } from '@/firebaseAdmin'
 import { NextResponse } from 'next/server'
-import { Console } from 'console'
 
 type Data = {
   answer: string
