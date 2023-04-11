@@ -3,10 +3,6 @@ import admin from 'firebase-admin'
 import { adminDb } from '@/firebaseAdmin'
 import { NextResponse } from 'next/server'
 
-type Data = {
-  answer: string
-}
-
 export async function POST(request: Request) {
   console.log('api called')
   console.log(request.body)

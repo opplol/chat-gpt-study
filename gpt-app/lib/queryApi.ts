@@ -6,8 +6,6 @@ const query = async (prompt: string, chatId: string, model: string) => {
       model,
       messages: [
         { role: 'system', content: 'あなたは先生です。' },
-        { role: 'assistant', content: 'コードを教えて下さい' },
-        { role: 'assistant', content: '返信はmarkdown形式でしてください' },
         { role: 'user', content: prompt },
       ],
       temperature: 0.9,
