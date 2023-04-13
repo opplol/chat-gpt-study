@@ -1,8 +1,6 @@
 import polly from "@/lib/awsPolly"
 
 export async function POST(req: Request) {
-  console.log('TTS api called')
-  console.log(req.body)
   const jsonBody = await req.json()
   const { answerText, session } = jsonBody
 

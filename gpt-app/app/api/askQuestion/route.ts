@@ -15,8 +15,22 @@ export async function POST(request: Request) {
   if (!chatId) {
     return new Response('Missing Chat Id', { status: 400 })
   }
+  if (!session) {
+    return new Response('No Seesion Info', { status: 400 })
+  }
 
-  const response = await query(prompt, chatId, model)
+  const storeCollection = adminDb
+    .collection('users')
+    .doc(session?.user?.email)
+    .collection('chats')
+    .doc(chatId)
+    .collection('messages')
+
+  const messages = await storeCollection.orderBy('createdAt', 'desc').limit(4).get()
+  const histories = messages.docs.map((doc) => doc.data())
+  console.log('askQuestion : messages , ', histories)
+
+  const response = await query(prompt, chatId, model, histories)
 
   const message: Message = {
     text: response || 'Sorry, I did not understand that.',
@@ -28,13 +42,7 @@ export async function POST(request: Request) {
     },
   }
 
-  await adminDb
-    .collection('users')
-    .doc(session?.user?.email)
-    .collection('chats')
-    .doc(chatId)
-    .collection('messages')
-    .add(message)
+  await storeCollection.add(message)
 
   return NextResponse.json({ answer: message.text })
 }
