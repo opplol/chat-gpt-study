@@ -4,7 +4,7 @@ services:
   node:
     build: .
     volumes:
-      - ./:/usr/src/app
-    command: sh -c 'cd react-app && yarn start'
+      - ./gpt-app:/gpt_app
+    command: sh -c 'npm run dev'
     ports:
       - '8001:3000'
