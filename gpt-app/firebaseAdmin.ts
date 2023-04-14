@@ -1,6 +1,7 @@
 import admin from 'firebase-admin'
 import { getApps } from 'firebase-admin/app'
 
+// to use config json file, uncomment the following line and comment the next line
 // const serviceAccount = require('./serviceAccountKey.json')
 
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT as string)
